@@ -6,117 +6,100 @@ body {
     margin: 0;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7fb;
-    color: #1f2937;
+    background: #f4f6f8;
+    color: #222;
 }
 
 .app-container {
-    width: min(900px, 92%);
-    margin: 45px auto;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-.app-header {
-    text-align: center;
-    margin-bottom: 28px;
-}
-
-.app-header h1 {
-    margin-bottom: 8px;
-    font-size: 2.2rem;
-}
-
-.app-header p {
-    margin: 0;
-    color: #64748b;
-}
-
-.task-controls,
-.summary,
-.task-section {
+.task-manager {
     background: #ffffff;
-    border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.task-controls {
-    padding: 22px;
+h1 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
-.input-row {
+.task-form {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
 }
 
 #taskInput {
-    flex: 1 1 280px;
-    min-width: 0;
-    padding: 12px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-#taskInput:focus,
-.edit-input:focus {
-    outline: 2px solid #64748b;
-    outline-offset: 1px;
+    flex: 1;
+    min-width: 220px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
 }
 
 button {
-    border: 0;
-    border-radius: 8px;
-    padding: 11px 15px;
-    font-size: 0.95rem;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    background: #334155;
-    color: #ffffff;
+    font-size: 14px;
 }
 
 button:hover {
-    opacity: 0.88;
+    opacity: 0.9;
+}
+
+#addTaskBtn {
+    background: #2563eb;
+    color: white;
 }
 
 #loadSamplesBtn {
     background: #475569;
+    color: white;
 }
 
-.task-message {
-    min-height: 20px;
-    margin: 10px 0 0;
-    font-weight: 600;
+.message {
+    min-height: 22px;
+    margin: 10px 0;
+    font-size: 14px;
 }
 
-.task-message.error {
-    color: #b91c1c;
+.message.error {
+    color: #dc2626;
 }
 
 .summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin: 22px 0;
-    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 25px 0;
 }
 
-.summary-card {
+.summary-item {
+    flex: 1;
+    padding: 15px;
     text-align: center;
-    padding: 10px;
+    background: #f1f5f9;
+    border-radius: 8px;
 }
 
-.summary-label {
+.summary-item span {
     display: block;
     margin-bottom: 5px;
-    color: #64748b;
-    font-size: 0.9rem;
+    font-size: 14px;
 }
 
-.summary-card strong {
-    font-size: 1.7rem;
-}
-
-.task-section {
-    padding: 20px;
+.summary-item strong {
+    font-size: 24px;
 }
 
 #taskList {
@@ -129,46 +112,49 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 14px;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
     margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     background: #ffffff;
-}
-
-.task-item:last-child {
-    margin-bottom: 0;
 }
 
 .task-text {
     flex: 1;
-    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.task-item.completed {
+    background: #f1f5f1;
 }
 
 .task-item.completed .task-text {
     text-decoration: line-through;
-    opacity: 0.55;
+    opacity: 0.6;
 }
 
 .complete-btn {
-    background: #166534;
+    background: #16a34a;
+    color: white;
 }
 
 .edit-btn {
-    background: #92400e;
+    background: #f59e0b;
+    color: white;
 }
 
 .remove-btn {
-    background: #991b1b;
+    background: #dc2626;
+    color: white;
 }
 
 .edit-input {
     flex: 1;
-    min-width: 100px;
-    padding: 9px 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    font-size: 1rem;
+    min-width: 150px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 .sr-only {
@@ -184,23 +170,27 @@ button:hover {
 }
 
 @media (max-width: 700px) {
-
-    .summary {
-        grid-template-columns: 1fr;
-    }
-
     .task-item {
-        align-items: stretch;
         flex-wrap: wrap;
     }
 
     .task-text,
     .edit-input {
+        width: 100%;
         flex-basis: 100%;
     }
 
-    .task-item button {
-        flex: 1;
+    .summary {
+        flex-direction: column;
     }
 
+    .task-form {
+        flex-direction: column;
+    }
+
+    #taskInput,
+    #addTaskBtn,
+    #loadSamplesBtn {
+        width: 100%;
+    }
 }
