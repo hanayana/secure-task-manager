@@ -25,14 +25,6 @@ function generateTaskId() {
   return id;
 }
 
-function createButton(className, label) {
-  const button = document.createElement("button");
-  button.classList.add(className);
-  button.type = "button";
-  button.textContent = label;
-  return button;
-}
-
 // ---------- Required functions ----------
 function createTaskElement(taskText, taskId) {
   const taskItem = document.createElement("li");
@@ -44,10 +36,25 @@ function createTaskElement(taskText, taskId) {
   textSpan.classList.add("task-text");
   textSpan.textContent = taskText;
 
+  const completeBtn = document.createElement("button");
+  completeBtn.classList.add("complete-btn");
+  completeBtn.type = "button";
+  completeBtn.textContent = "Complete";
+
+  const editBtn = document.createElement("button");
+  editBtn.classList.add("edit-btn");
+  editBtn.type = "button";
+  editBtn.textContent = "Edit";
+
+  const removeBtn = document.createElement("button");
+  removeBtn.classList.add("remove-btn");
+  removeBtn.type = "button";
+  removeBtn.textContent = "Remove";
+
   taskItem.appendChild(textSpan);
-  taskItem.appendChild(createButton("complete-btn", "Complete"));
-  taskItem.appendChild(createButton("edit-btn", "Edit"));
-  taskItem.appendChild(createButton("remove-btn", "Remove"));
+  taskItem.appendChild(completeBtn);
+  taskItem.appendChild(editBtn);
+  taskItem.appendChild(removeBtn);
 
   return taskItem;
 }
@@ -134,19 +141,18 @@ function updateTaskCounts() {
 }
 
 function handleTaskListClick(event) {
-  const target = event.target;
-  const taskItem = target.closest(".task-item");
-  if (!taskItem || !taskList.contains(taskItem)) return;
+  const taskItem = event.target.closest(".task-item");
+  if (!taskItem) return;
 
-  if (target.matches(".complete-btn")) {
+  if (event.target.matches(".complete-btn")) {
     toggleTaskComplete(taskItem);
-  } else if (target.matches(".edit-btn")) {
+  } else if (event.target.matches(".edit-btn")) {
     if (taskItem.querySelector(".edit-input")) {
       saveTaskEdit(taskItem);
     } else {
       beginTaskEdit(taskItem);
     }
-  } else if (target.matches(".remove-btn")) {
+  } else if (event.target.matches(".remove-btn")) {
     removeTask(taskItem);
   }
 }
