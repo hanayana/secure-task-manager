@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Secure Dynamic Task Manager</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="app-container">
+
+        <header class="app-header">
+            <h1>Secure Dynamic Task Manager</h1>
+
+            <p>
+                Create, edit, complete, and remove tasks safely
+                without reloading the page.
+            </p>
+        </header>
+
+
+        <section class="task-controls" aria-label="Task controls">
+
+            <div class="input-row">
+
+                <label for="taskInput" class="sr-only">
+                    Task
+                </label>
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Enter a task"
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    id="addTaskBtn"
+                >
+                    Add Task
+                </button>
+
+                <button
+                    type="button"
+                    id="loadSamplesBtn"
+                >
+                    Load Sample Tasks
+                </button>
+
+            </div>
+
+
+            <p
+                id="taskMessage"
+                class="task-message"
+                role="alert"
+                aria-live="polite"
+            ></p>
+
+        </section>
+
+
+        <section
+            class="summary"
+            aria-label="Task summary"
+        >
+
+            <div class="summary-card">
+
+                <span class="summary-label">
+                    Total Tasks
+                </span>
+
+                <strong id="totalCount">0</strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-label">
+                    Pending
+                </span>
+
+                <strong id="pendingCount">0</strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-label">
+                    Completed
+                </span>
+
+                <strong id="completedCount">0</strong>
+
+            </div>
+
+        </section>
+
+
+        <section
+            class="task-section"
+            aria-label="Task list"
+        >
+
+            <ul id="taskList"></ul>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
